@@ -6,9 +6,9 @@ import store from "@/store";
 import vuetify from "@/plugins/vuetify";
 import confetti from "@/plugins/confetti";
 import { initializeApp } from "firebase/app";
-import firebaseConfig from "@/plugins/firebaseConfig.js";
+// import firebaseConfig from "@/plugins/firebaseConfig.js";
 
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 
