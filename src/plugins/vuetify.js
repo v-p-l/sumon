@@ -10,8 +10,8 @@ export default new Vuetify({
 		dark: false,
 		themes: {
 			light: {
-        primary: colors.purple,
-        secondary: colors.grey.darken1,
+        primary: '#FFCB05',
+        secondary: '#3564AD',
         accent: colors.shades.black,
         error: colors.red.accent3,
 				info: '#2196F3',
@@ -20,8 +20,8 @@ export default new Vuetify({
 				background: '#F4F5FA'
 			},
 			dark: {
-        primary: colors.blue.lighten3,
-        secondary: colors.grey.darken1,
+        primary: '#FFCB05',
+        secondary: '#3564AD',
         accent: colors.shades.black,
         error: colors.red.accent3,
 				info: '#2196F3',

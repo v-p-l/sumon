@@ -1,0 +1,42 @@
+[
+  {
+    "en": "black",
+    "fr": "noir"
+  },
+  {
+    "en": "blue",
+    "fr": "bleu"
+  },
+  {
+    "en": "brown",
+    "fr": "marron"
+  },
+  {
+    "en": "gray",
+    "fr": "gris"
+  },
+  {
+    "en": "green",
+    "fr": "vert"
+  },
+  {
+    "en": "pink",
+		"fr": "rose"
+	},
+  {
+    "en": "purple",
+		"fr": "violet"
+	},
+  {
+    "en": "red",
+		"fr": "rouge"
+	},
+  {
+    "en": "white",
+		"fr": "blanc"
+	},
+  {
+    "en": "yellow",
+		"fr": "jaune"
+	}
+]

@@ -57,21 +57,15 @@ export default {
     return {
       items: [
         {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
+          title: "Sumon",
+          icon: "mdi-controller-classic",
           to: "/",
           authRequired: false,
         },
         {
-          title: "About",
-          icon: "mdi-help-box",
-          to: "/about",
-          authRequired: false,
-        },
-        {
-          title: "Authenticated",
-          icon: "mdi-security",
-          to: "/auth",
+          title: "Stats",
+          icon: "mdi-chart-line",
+          to: "/stats",
           authRequired: true,
         },
       ],

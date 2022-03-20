@@ -1,0 +1,606 @@
+[
+  {
+    "fr": "bulbizarre",
+    "en": "bulbasaur"
+  },
+  {
+    "fr": "herbizarre",
+    "en": "ivysaur"
+  },
+  {
+    "fr": "florizarre",
+    "en": "venusaur"
+  },
+  {
+    "fr": "salamèche",
+    "en": "charmander"
+  },
+  {
+    "fr": "reptincel",
+    "en": "charmeleon"
+  },
+  {
+    "fr": "dracaufeu",
+    "en": "charizard"
+  },
+  {
+    "fr": "carapuce",
+    "en": "squirtle"
+  },
+  {
+    "fr": "carabaffe",
+    "en": "wartortle"
+  },
+  {
+    "fr": "tortank",
+    "en": "blastoise"
+  },
+  {
+    "fr": "chenipan",
+    "en": "caterpie"
+  },
+  {
+    "fr": "chrysacier",
+    "en": "metapod"
+  },
+  {
+    "fr": "papilusion",
+    "en": "butterfree"
+  },
+  {
+    "fr": "aspicot",
+    "en": "weedle"
+  },
+  {
+    "fr": "coconfort",
+    "en": "kakuna"
+  },
+  {
+    "fr": "dardargnan",
+    "en": "beedrill"
+  },
+  {
+    "fr": "roucool",
+    "en": "pidgey"
+  },
+  {
+    "fr": "roucoups",
+    "en": "pidgeotto"
+  },
+  {
+    "fr": "roucarnage",
+    "en": "pidgeot"
+  },
+  {
+    "fr": "rattata",
+    "en": "rattata"
+  },
+  {
+    "fr": "rattatac",
+    "en": "raticate"
+  },
+  {
+    "fr": "piafabec",
+    "en": "spearow"
+  },
+  {
+    "fr": "rapasdepic",
+    "en": "fearow"
+  },
+  {
+    "fr": "abo",
+    "en": "ekans"
+  },
+  {
+    "fr": "arbok",
+    "en": "arbok"
+  },
+  {
+    "fr": "pikachu",
+    "en": "pikachu"
+  },
+  {
+    "fr": "raichu",
+    "en": "raichu"
+  },
+  {
+    "fr": "sabelette",
+    "en": "sandshrew"
+  },
+  {
+    "fr": "sablaireau",
+    "en": "sandslash"
+  },
+  {
+    "fr": "nidoran♀",
+    "en": "nidoranf"
+  },
+  {
+    "fr": "nidorina",
+    "en": "nidorina"
+  },
+  {
+    "fr": "nidoqueen",
+    "en": "nidoqueen"
+  },
+  {
+    "fr": "nidoran♂",
+    "en": "nidoranm"
+  },
+  {
+    "fr": "nidorino",
+    "en": "nidorino"
+  },
+  {
+    "fr": "nidoking",
+    "en": "nidoking"
+  },
+  {
+    "fr": "mélofée",
+    "en": "clefairy"
+  },
+  {
+    "fr": "mélodelfe",
+    "en": "clefable"
+  },
+  {
+    "fr": "goupix",
+    "en": "vulpix"
+  },
+  {
+    "fr": "feunard",
+    "en": "ninetales"
+  },
+  {
+    "fr": "rondoudou",
+    "en": "jigglypuff"
+  },
+  {
+    "fr": "grodoudou",
+    "en": "wigglytuff"
+  },
+  {
+    "fr": "nosferapti",
+    "en": "zubat"
+  },
+  {
+    "fr": "nosferalto",
+    "en": "golbat"
+  },
+  {
+    "fr": "mystherbe",
+    "en": "oddish"
+  },
+  {
+    "fr": "ortide",
+    "en": "gloom"
+  },
+  {
+    "fr": "rafflesia",
+    "en": "vileplume"
+  },
+  {
+    "fr": "paras",
+    "en": "paras"
+  },
+  {
+    "fr": "parasect",
+    "en": "parasect"
+  },
+  {
+    "fr": "mimitoss",
+    "en": "venonat"
+  },
+  {
+    "fr": "aéromite",
+    "en": "venomoth"
+  },
+  {
+    "fr": "taupiqueur",
+    "en": "diglett"
+  },
+  {
+    "fr": "triopikeur",
+    "en": "dugtrio"
+  },
+  {
+    "fr": "miaouss",
+    "en": "meowth"
+  },
+  {
+    "fr": "persian",
+    "en": "persian"
+  },
+  {
+    "fr": "psykokwak",
+    "en": "psyduck"
+  },
+  {
+    "fr": "akwakwak",
+    "en": "golduck"
+  },
+  {
+    "fr": "férosinge",
+    "en": "mankey"
+  },
+  {
+    "fr": "colossinge",
+    "en": "primeape"
+  },
+  {
+    "fr": "caninos",
+    "en": "growlithe"
+  },
+  {
+    "fr": "arcanin",
+    "en": "arcanine"
+  },
+  {
+    "fr": "ptitard",
+    "en": "poliwag"
+  },
+  {
+    "fr": "têtarte",
+    "en": "poliwhirl"
+  },
+  {
+    "fr": "tartard",
+    "en": "poliwrath"
+  },
+  {
+    "fr": "abra",
+    "en": "abra"
+  },
+  {
+    "fr": "kadabra",
+    "en": "kadabra"
+  },
+  {
+    "fr": "alakazam",
+    "en": "alakazam"
+  },
+  {
+    "fr": "machoc",
+    "en": "machop"
+  },
+  {
+    "fr": "machopeur",
+    "en": "machoke"
+  },
+  {
+    "fr": "mackogneur",
+    "en": "machamp"
+  },
+  {
+    "fr": "chétiflor",
+    "en": "bellsprout"
+  },
+  {
+    "fr": "boustiflor",
+    "en": "weepinbell"
+  },
+  {
+    "fr": "empiflor",
+    "en": "victreebel"
+  },
+  {
+    "fr": "tentacool",
+    "en": "tentacool"
+  },
+  {
+    "fr": "tentacruel",
+    "en": "tentacruel"
+  },
+  {
+    "fr": "racaillou",
+    "en": "geodude"
+  },
+  {
+    "fr": "gravalanch",
+    "en": "graveler"
+  },
+  {
+    "fr": "grolem",
+    "en": "golem"
+  },
+  {
+    "fr": "ponyta",
+    "en": "ponyta"
+  },
+  {
+    "fr": "galopa",
+    "en": "rapidash"
+  },
+  {
+    "fr": "ramoloss",
+    "en": "slowpoke"
+  },
+  {
+    "fr": "flagadoss",
+    "en": "slowbro"
+  },
+  {
+    "fr": "magnéti",
+    "en": "magnemite"
+  },
+  {
+    "fr": "magnéton",
+    "en": "magneton"
+  },
+  {
+    "fr": "canarticho",
+    "en": "farfetch'd"
+  },
+  {
+    "fr": "doduo",
+    "en": "doduo"
+  },
+  {
+    "fr": "dodrio",
+    "en": "dodrio"
+  },
+  {
+    "fr": "otaria",
+    "en": "seel"
+  },
+  {
+    "fr": "lamantine",
+    "en": "dewgong"
+  },
+  {
+    "fr": "tadmorv",
+    "en": "grimer"
+  },
+  {
+    "fr": "grotadmorv",
+    "en": "muk"
+  },
+  {
+    "fr": "kokiyas",
+    "en": "shellder"
+  },
+  {
+    "fr": "crustabri",
+    "en": "cloyster"
+  },
+  {
+    "fr": "fantominus",
+    "en": "gastly"
+  },
+  {
+    "fr": "spectrum",
+    "en": "haunter"
+  },
+  {
+    "fr": "ectoplasma",
+    "en": "gengar"
+  },
+  {
+    "fr": "onix",
+    "en": "onix"
+  },
+  {
+    "fr": "soporifik",
+    "en": "drowzee"
+  },
+  {
+    "fr": "hypnomade",
+    "en": "hypno"
+  },
+  {
+    "fr": "krabby",
+    "en": "krabby"
+  },
+  {
+    "fr": "krabboss",
+    "en": "kingler"
+  },
+  {
+    "fr": "voltorbe",
+    "en": "voltorb"
+  },
+  {
+    "fr": "électrode",
+    "en": "electrode"
+  },
+  {
+    "fr": "noeunoeuf",
+    "en": "exeggcute"
+  },
+  {
+    "fr": "noadkoko",
+    "en": "exeggutor"
+  },
+  {
+    "fr": "osselait",
+    "en": "cubone"
+  },
+  {
+    "fr": "ossatueur",
+    "en": "marowak"
+  },
+  {
+    "fr": "kicklee",
+    "en": "hitmonlee"
+  },
+  {
+    "fr": "tygnon",
+    "en": "hitmonchan"
+  },
+  {
+    "fr": "excelangue",
+    "en": "lickitung"
+  },
+  {
+    "fr": "smogo",
+    "en": "koffing"
+  },
+  {
+    "fr": "smogogo",
+    "en": "weezing"
+  },
+  {
+    "fr": "rhinocorne",
+    "en": "rhyhorn"
+  },
+  {
+    "fr": "rhinoféros",
+    "en": "rhydon"
+  },
+  {
+    "fr": "leveinard",
+    "en": "chansey"
+  },
+  {
+    "fr": "saquedeneu",
+    "en": "tangela"
+  },
+  {
+    "fr": "kangourex",
+    "en": "kangaskhan"
+  },
+  {
+    "fr": "hypotrempe",
+    "en": "horsea"
+  },
+  {
+    "fr": "hypocéan",
+    "en": "seadra"
+  },
+  {
+    "fr": "poissirène",
+    "en": "goldeen"
+  },
+  {
+    "fr": "poissoroy",
+    "en": "seaking"
+  },
+  {
+    "fr": "stari",
+    "en": "staryu"
+  },
+  {
+    "fr": "staross",
+    "en": "starmie"
+  },
+  {
+    "fr": "m. mime",
+    "en": "mr. mime"
+  },
+  {
+    "fr": "insécateur",
+    "en": "scyther"
+  },
+  {
+    "fr": "lippoutou",
+    "en": "jynx"
+  },
+  {
+    "fr": "élektek",
+    "en": "electabuzz"
+  },
+  {
+    "fr": "magmar",
+    "en": "magmar"
+  },
+  {
+    "fr": "scarabrute",
+    "en": "pinsir"
+  },
+  {
+    "fr": "tauros",
+    "en": "tauros"
+  },
+  {
+    "fr": "magicarpe",
+    "en": "magikarp"
+  },
+  {
+    "fr": "léviator",
+    "en": "gyarados"
+  },
+  {
+    "fr": "lokhlass",
+    "en": "lapras"
+  },
+  {
+    "fr": "métamorph",
+    "en": "ditto"
+  },
+  {
+    "fr": "évoli",
+    "en": "eevee"
+  },
+  {
+    "fr": "aquali",
+    "en": "vaporeon"
+  },
+  {
+    "fr": "voltali",
+    "en": "jolteon"
+  },
+  {
+    "fr": "pyroli",
+    "en": "flareon"
+  },
+  {
+    "fr": "porygon",
+    "en": "porygon"
+  },
+  {
+    "fr": "amonita",
+    "en": "omanyte"
+  },
+  {
+    "fr": "amonistar",
+    "en": "omastar"
+  },
+  {
+    "fr": "kabuto",
+    "en": "kabuto"
+  },
+  {
+    "fr": "kabutops",
+    "en": "kabutops"
+  },
+  {
+    "fr": "ptéra",
+    "en": "aerodactyl"
+  },
+  {
+    "fr": "ronflex",
+    "en": "snorlax"
+  },
+  {
+    "fr": "artikodin",
+    "en": "articuno"
+  },
+  {
+    "fr": "électhor",
+    "en": "zapdos"
+  },
+  {
+    "fr": "sulfura",
+    "en": "moltres"
+  },
+  {
+    "fr": "minidraco",
+    "en": "dratini"
+  },
+  {
+    "fr": "draco",
+    "en": "dragonair"
+  },
+  {
+    "fr": "dracolosse",
+    "en": "dragonite"
+  },
+  {
+    "fr": "mewtwo",
+    "en": "mewtwo"
+  },
+  {
+    "fr": "mew",
+    "en": "mew"
+  }
+]

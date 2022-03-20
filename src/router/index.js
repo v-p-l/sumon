@@ -12,9 +12,13 @@ const routes = [
 		component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+    path: '/stats',
+    name: 'Stats',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/Stats.vue'),
+		meta: {
+			requiredAuth: true,
+			requiredMailVerified: true
+		}
   },
 	{
 		path: "/settings",
@@ -22,15 +26,6 @@ const routes = [
 		component: () => import(/* webpackChunkName: "settings" */ '@/views/Settings/Settings.vue'),
 		meta: {
 			requiredAuth: true
-		}
-	},
-	{
-		path: "/auth",
-		name: "auth",
-		component: () => import(/* webpackChunkName: "Authenticated" */ '@/views/Authenticated.vue'),
-		meta: {
-			requiredAuth: true,
-			requiredMailVerified: true
 		}
 	},
   {
