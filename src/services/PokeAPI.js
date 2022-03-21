@@ -1,14 +1,56 @@
 import API from './API';
 import PokemonNames from "@/traductions/pokemons.json";
+import PokemonTypes from "@/traductions/types.json";
+import PokemonColors from "@/traductions/colors.json";
 
 const url = "https://pokeapi.co/api/v2";
 
 function filterTypes(array) {
 	let types = [];
 	for (let i = 0; i < array.length; i++) {
-		types.push(array[i].type.name)
+		let translatedType = translateType(array[i].type.name);
+		types.push(translatedType);
 	}
 	return types;
+}
+
+function translateType(pokemonType) {
+	const type = PokemonTypes.find((x) => x.en === pokemonType);
+	if (type) {
+		return type.fr;
+	} else {
+		throw "Ce type n'existe pas.";
+	}
+}
+
+function translateColor(color) {
+	const pokemonColor = PokemonColors.find((x) => x.en === color);
+	if (pokemonColor) {
+		return pokemonColor.fr;
+	} else {
+		throw "Cette couleur n'existe pas.";
+	}
+}
+
+function transformGen(gen) {
+	switch (gen) {
+		case "generation-i":
+			return "1";
+		case "generation-ii":
+			return "2";
+		case "generation-iii":
+			return "3";
+		case "generation-iv":
+			return "4";
+		case "generation-v":
+			return "5";
+		case "generation-vi":
+			return "6";
+		case "generation-vii":
+			return "7";
+		case "generation-viii":
+			return "8";
+	}
 }
 
 async function generateRandomID(max) {
@@ -17,7 +59,7 @@ async function generateRandomID(max) {
 
 export default {
 	async generateRandomPokemon() {
-		const id = await generateRandomID(150);
+		const id = await generateRandomID(381);
 		const data = await this.getPokemonByID(id);
 		return data;
 	},
@@ -45,8 +87,8 @@ export default {
 			.then((res) => {
 				const is_leg_or_myth = res.data.is_legendary || res.data.is_mythical;
 				const french_name = res.data.names[4].name; // 4 = French
-				const color = res.data.color.name;
-				const generation = res.data.generation.name;
+				const color = translateColor(res.data.color.name);
+				const generation = transformGen(res.data.generation.name);
 				const is_evolution = res.data.evolves_from_species != null;
 				return { is_leg_or_myth, french_name, color, generation, is_evolution };
 			})

@@ -1,6 +1,6 @@
 const getDefaultState = () => {
   return {
-		showNavBar: true,
+		showNavBar: false,
 		darkMode: false,
   }
 }

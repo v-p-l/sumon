@@ -21,32 +21,49 @@
         </v-row>
       </v-container>
     </v-img>
+    <v-row no-gutters v-if="pokemonToGuess" class="justify-space-between mb-4">
+      <div v-for="(type, i) in pokemonToGuess.types" :key="i">
+        <ChipGuessType :guessType="type" :answersTypes="answersTypes" />
+      </div>
+      <ChipGuessColor
+        :guessColor="pokemonToGuess.color"
+        :answersColor="answersColor"
+      />
+      <ChipGuessGen
+        :guessGen="pokemonToGuess.generation"
+        :answersGen="answersGen"
+      />
+      <ChipGuessIsEvo
+        :guessIsEvo="pokemonToGuess.is_evolution"
+        :answersIsEvo="answersIsEvo"
+      />
+      <ChipGuessIsLegOrMyth
+        :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
+        :answersIsLegOrMyth="answersIsLegOrMyth"
+      />
+    </v-row>
     <v-row v-if="!isPokemonGuessed" no-gutters class="align-end">
       <v-autocomplete
         v-model="pokemonNameToVerify"
-        :items="pokemonNameFR"
-				:disabled="loading"
+        :items="pokemonNamesFR"
         hide-details
         auto-select-first
-				ref="regzerge"
+        filled
+        dense
+        color="dark"
+        ref="autocomplete"
         label="Nom du pokémon"
-        color="primary"
-        class="mr-2"
       >
         <template #item="{ item }">
           <v-list-item
             class="d-flex"
             @click="verifyPokemon(item)"
-						@keyup.enter="verifyPokemon(pokemonNameToVerify)"
+            @keyup.enter="verifyPokemon(pokemonNameToVerify)"
           >
             <div class="ml-2">{{ item }}</div>
           </v-list-item>
         </template>
       </v-autocomplete>
-      <v-btn color="primary" @click="verifyPokemon(pokemonNameToVerify)">
-        <v-icon v-if="!loading" color="white">mdi-arrow-left-bottom</v-icon>
-        <IconLoading v-else />
-      </v-btn>
     </v-row>
     <small v-if="verifyError" class="red--text">{{ verifyError }}</small>
     <v-data-table
@@ -65,49 +82,45 @@
       </template>
       <!-- Pokedex number -->
       <template v-slot:[`item.id`]="{ item }">
-        <ChipID
-          :isValid="item.id === pokemonToGuess.id"
-          :id="item.id"
-        />
+        <ChipAnswerID :guessID="pokemonToGuess.id" :answerID="item.id" />
       </template>
-      <!-- Is evolution -->
       <!-- Types -->
       <template v-slot:[`item.types`]="{ item }">
         <div class="d-flex flex-column" style="gap: 4px">
           <div v-for="(type, i) in item.types" :key="i">
-            <ChipType
-              :isValid="pokemonToGuess.types.includes(type)"
-              :pokemonType="type"
+            <ChipAnswerType
+              :guessTypes="pokemonToGuess.types"
+              :answerType="type"
             />
           </div>
         </div>
       </template>
       <!-- Color -->
       <template v-slot:[`item.color`]="{ item }">
-        <ChipColor
-          :isValid="item.color === pokemonToGuess.color"
-          :pokemonColor="item.color"
+        <ChipAnswerColor
+          :guessColor="pokemonToGuess.color"
+          :answerColor="item.color"
         />
       </template>
       <!-- Generation -->
       <template v-slot:[`item.generation`]="{ item }">
-        <ChipGeneration
-          :isValid="item.generation === pokemonToGuess.generation"
-          :pokemonGen="item.generation"
+        <ChipAnswerGen
+          :guessGen="pokemonToGuess.generation"
+          :answerGen="item.generation"
         />
       </template>
       <!-- Is evolution -->
       <template v-slot:[`item.is_evolution`]="{ item }">
-        <ChipIsEvolution
-          :isValid="item.is_evolution === pokemonToGuess.is_evolution"
-          :isEvolution="item.is_evolution"
+        <ChipAnswerIsEvo
+          :guessIsEvo="pokemonToGuess.is_evolution"
+          :answerIsEvo="item.is_evolution"
         />
       </template>
       <!-- Is legendary or mythical -->
       <template v-slot:[`item.is_leg_or_myth`]="{ item }">
-        <ChipIsLegOrMyth
-          :isValid="item.is_leg_or_myth === pokemonToGuess.is_leg_or_myth"
-          :isLegOrMyth="item.is_leg_or_myth"
+        <ChipAnswerIsLegOrMyth
+          :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
+          :answerIsLegOrMyth="item.is_leg_or_myth"
         />
       </template>
     </v-data-table>
@@ -155,25 +168,33 @@
 
 <script>
 import PokeAPI from "@/services/PokeAPI";
-import ChipID from "@/components/Chips/ChipID.vue";
-import ChipType from "@/components/Chips/ChipType.vue";
-import ChipColor from "@/components/Chips/ChipColor.vue";
-import ChipGeneration from "@/components/Chips/ChipGeneration.vue";
-import ChipIsEvolution from "@/components/Chips/ChipIsEvolution.vue";
-import ChipIsLegOrMyth from "@/components/Chips/ChipIsLegOrMyth.vue";
 import PokemonNames from "@/traductions/pokemons.json";
-import IconLoading from "@/components/Icons/IconLoading.vue";
+import ChipAnswerID from "@/components/Chips/Answer/ChipAnswerID.vue";
+import ChipAnswerType from "@/components/Chips/Answer/ChipAnswerType.vue";
+import ChipAnswerColor from "@/components/Chips/Answer/ChipAnswerColor.vue";
+import ChipAnswerGen from "@/components/Chips/Answer/ChipAnswerGen.vue";
+import ChipAnswerIsEvo from "@/components/Chips/Answer/ChipAnswerIsEvo.vue";
+import ChipAnswerIsLegOrMyth from "@/components/Chips/Answer/ChipAnswerIsLegOrMyth.vue";
+import ChipGuessType from "@/components/Chips/Guess/ChipGuessType.vue";
+import ChipGuessColor from "@/components/Chips/Guess/ChipGuessColor.vue";
+import ChipGuessGen from "@/components/Chips/Guess/ChipGuessGen.vue";
+import ChipGuessIsEvo from "@/components/Chips/Guess/ChipGuessIsEvo.vue";
+import ChipGuessIsLegOrMyth from "@/components/Chips/Guess/ChipGuessIsLegOrMyth.vue";
 
 export default {
   name: "Sumon",
   components: {
-    ChipType,
-    ChipColor,
-    ChipGeneration,
-    ChipIsEvolution,
-    ChipIsLegOrMyth,
-    IconLoading,
-		ChipID
+    ChipAnswerType,
+    ChipAnswerColor,
+    ChipAnswerGen,
+    ChipAnswerIsEvo,
+    ChipAnswerIsLegOrMyth,
+    ChipAnswerID,
+    ChipGuessType,
+    ChipGuessColor,
+		ChipGuessGen,
+		ChipGuessIsEvo,
+		ChipGuessIsLegOrMyth
   },
   mixins: [],
   data() {
@@ -191,7 +212,7 @@ export default {
           sortable: false,
         },
         {
-          text: "Evolution",
+          text: "Evo.",
           value: "is_evolution",
           sortable: false,
         },
@@ -215,17 +236,32 @@ export default {
         defaultSize: 6,
       },
       dialogEndGame: false,
-      pokemonNameFR: [],
+      pokemonNamesFR: [],
     };
   },
   mounted() {
-    this.generatePokemon();
-    this.loadPokemonNameFR();
+    this.test();
+    this.loadPokemonNamesFR();
   },
   computed: {
     isPokemonGuessed() {
       return this.answers.some((x) => x.id === this.pokemonToGuess.id);
     },
+    answersTypes() {
+      return [...new Set(this.answers.flatMap((i) => i.types))];
+    },
+    answersColor() {
+      return [...new Set(this.answers.map((x) => x.color))];
+    },
+		answersGen() {
+			return [...new Set(this.answers.map((x) => x.generation))];
+		},
+		answersIsEvo() {
+			return [...new Set(this.answers.map((x) => x.is_evolution))];
+		},
+		answersIsLegOrMyth() {
+			return [...new Set(this.answers.map((x) => x.is_leg_or_myth))];
+		}
   },
   methods: {
     playAgain() {
@@ -234,7 +270,7 @@ export default {
     },
     async test() {
       try {
-        this.pokemonToGuess = await PokeAPI.getPokemonByID(150);
+        this.pokemonToGuess = await PokeAPI.getPokemonByID(149);
       } catch (err) {
         this.error = err;
       }
@@ -248,7 +284,7 @@ export default {
       }
     },
     async verifyPokemon(name) {
-			this.$refs.regzerge.isMenuActive = false;
+      this.$refs.autocomplete.isMenuActive = false;
       this.loading = true;
 
       const alreadyVerified = this.answers.find((x) => x.french_name === name);
@@ -270,12 +306,9 @@ export default {
         this.verifyError = err;
       }
     },
-    playConfetti() {
-      this.$confetti.start();
-    },
-    loadPokemonNameFR() {
+    loadPokemonNamesFR() {
       for (let i = 0; i < PokemonNames.length; i++) {
-        this.pokemonNameFR.push(PokemonNames[i].fr);
+        this.pokemonNamesFR.push(PokemonNames[i].fr);
       }
     },
   },
