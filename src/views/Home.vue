@@ -32,13 +32,13 @@
 				class="mr-2"
 				@keyup.enter="verifyPokemon(pokemonNameToVerify)"
       ></v-autocomplete>
-      <v-btn
+      <!-- <v-btn
         color="primary"
         @click="verifyPokemon(pokemonNameToVerify)"
       >
         <v-icon v-if="!loading" color="white">mdi-arrow-left-bottom</v-icon>
         <IconLoading v-else />
-      </v-btn>
+      </v-btn> -->
     </v-row>
     <small v-if="verifyError" class="red--text">{{ verifyError }}</small>
     <v-data-table
@@ -145,7 +145,7 @@ import ChipGeneration from "@/components/Chips/ChipGeneration.vue";
 import ChipIsEvolution from "@/components/Chips/ChipIsEvolution.vue";
 import ChipIsLegOrMyth from "@/components/Chips/ChipIsLegOrMyth.vue";
 import PokemonNames from "@/traductions/pokemons.json";
-import IconLoading from "@/components/Icons/IconLoading.vue";
+// import IconLoading from "@/components/Icons/IconLoading.vue";
 
 export default {
   name: "Sumon",
@@ -155,7 +155,7 @@ export default {
     ChipGeneration,
     ChipIsEvolution,
     ChipIsLegOrMyth,
-    IconLoading,
+    // IconLoading,
   },
   mixins: [],
   data() {
