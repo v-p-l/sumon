@@ -25,20 +25,27 @@
       <v-autocomplete
         v-model="pokemonNameToVerify"
         :items="pokemonNameFR"
-				hide-details
-				auto-select-first
+        hide-details
+        auto-select-first
+				ref="regzerge"
         label="Nom du pokémon"
-				color="primary"
-				class="mr-2"
-				@keyup.enter="verifyPokemon(pokemonNameToVerify)"
-      ></v-autocomplete>
-      <!-- <v-btn
         color="primary"
-        @click="verifyPokemon(pokemonNameToVerify)"
+        class="mr-2"
       >
+        <template #item="{ item }">
+          <v-list-item
+            class="d-flex"
+            @click="verifyPokemon(item)"
+						@keyup.enter="verifyPokemon(pokemonNameToVerify)"
+          >
+            <div class="ml-2">{{ item }}</div>
+          </v-list-item>
+        </template>
+      </v-autocomplete>
+      <v-btn color="primary" @click="verifyPokemon(pokemonNameToVerify)">
         <v-icon v-if="!loading" color="white">mdi-arrow-left-bottom</v-icon>
         <IconLoading v-else />
-      </v-btn> -->
+      </v-btn>
     </v-row>
     <small v-if="verifyError" class="red--text">{{ verifyError }}</small>
     <v-data-table
@@ -126,9 +133,9 @@
                 Sumon #{{ pokemonToGuess.id }}, {{ answers.length }}
               </div>
               <v-btn small color="primary">
-								<v-icon small class="mr-1">mdi-content-copy</v-icon>
-								<span>Copier</span>
-							</v-btn>
+                <v-icon small class="mr-1">mdi-content-copy</v-icon>
+                <span>Copier</span>
+              </v-btn>
             </v-row>
           </v-col>
         </v-row>
@@ -145,7 +152,7 @@ import ChipGeneration from "@/components/Chips/ChipGeneration.vue";
 import ChipIsEvolution from "@/components/Chips/ChipIsEvolution.vue";
 import ChipIsLegOrMyth from "@/components/Chips/ChipIsLegOrMyth.vue";
 import PokemonNames from "@/traductions/pokemons.json";
-// import IconLoading from "@/components/Icons/IconLoading.vue";
+import IconLoading from "@/components/Icons/IconLoading.vue";
 
 export default {
   name: "Sumon",
@@ -155,7 +162,7 @@ export default {
     ChipGeneration,
     ChipIsEvolution,
     ChipIsLegOrMyth,
-    // IconLoading,
+    IconLoading,
   },
   mixins: [],
   data() {
@@ -196,12 +203,12 @@ export default {
         defaultSize: 6,
       },
       dialogEndGame: false,
-			pokemonNameFR: []
+      pokemonNameFR: [],
     };
   },
   mounted() {
     this.generatePokemon();
-		this.loadPokemonNameFR();
+    this.loadPokemonNameFR();
   },
   computed: {
     isPokemonGuessed() {
@@ -229,6 +236,7 @@ export default {
       }
     },
     async verifyPokemon(name) {
+			this.$refs.regzerge.isMenuActive = false;
       this.loading = true;
 
       const alreadyVerified = this.answers.find((x) => x.french_name === name);
@@ -253,16 +261,16 @@ export default {
     playConfetti() {
       this.$confetti.start();
     },
-		loadPokemonNameFR() {
-			for (let i = 0; i < PokemonNames.length; i++) {
-				this.pokemonNameFR.push(PokemonNames[i].fr)
-			}
-		}
+    loadPokemonNameFR() {
+      for (let i = 0; i < PokemonNames.length; i++) {
+        this.pokemonNameFR.push(PokemonNames[i].fr);
+      }
+    },
   },
   watch: {
     isPokemonGuessed(newValue) {
       if (newValue) {
-				this.dialogEndGame = true;
+        this.dialogEndGame = true;
         this.$confetti.start(this.particlesStyle);
         setTimeout(
           function () {

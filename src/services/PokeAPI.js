@@ -44,7 +44,7 @@ export default {
 			.get('/pokemon-species/' + id)
 			.then((res) => {
 				const is_leg_or_myth = res.data.is_legendary || res.data.is_mythical;
-				const french_name = res.data.names[4].name.toLowerCase(); // 4 = French
+				const french_name = res.data.names[4].name; // 4 = French
 				const color = res.data.color.name;
 				const generation = res.data.generation.name;
 				const is_evolution = res.data.evolves_from_species != null;
