@@ -4,44 +4,64 @@
       class="mb-2"
       src="https://i0.wp.com/www.alphr.com/wp-content/uploads/2016/07/whos_that_pokemon.png?fit=1920%2C1080&ssl=1"
     >
-      <v-container fill-height class="align-start pa-0">
-        <v-row no-gutters class="justify-end pt-2 pr-2">
-          <v-btn small @click="playAgain()">
-            <span>Play again</span>
-          </v-btn>
-        </v-row>
-        <v-row no-gutters style="height: calc(100% - 38px)">
-          <v-img
-            v-if="isPokemonGuessed"
-            max-height="150"
-            max-width="150"
-            style="left: 8%"
-            :src="pokemonToGuess.sprite"
-          ></v-img>
+      <v-container fill-height class="pa-0">
+        <v-row
+          no-gutters
+          v-if="pokemonToGuess"
+          class="d-flex flex-row fill-height pl-2"
+        >
+          <v-col
+            class="d-flex flex-column justify-center fill-height;"
+            style="gap: 8px"
+          >
+            <div v-for="(type, i) in pokemonToGuess.types" :key="i">
+              <ChipGuessType
+                :guessType="type"
+                :answersTypes="answersTypes"
+                :number="i + 1"
+              />
+            </div>
+            <div>
+              <ChipGuessColor
+                :guessColor="pokemonToGuess.color"
+                :answersColor="answersColor"
+              />
+            </div>
+            <div>
+              <ChipGuessGen
+                :guessGen="pokemonToGuess.generation"
+                :answersGen="answersGen"
+              />
+            </div>
+            <div>
+              <ChipGuessIsEvo
+                :guessIsEvo="pokemonToGuess.is_evolution"
+                :answersIsEvo="answersIsEvo"
+              />
+            </div>
+            <div>
+              <ChipGuessIsLegOrMyth
+                :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
+                :answersIsLegOrMyth="answersIsLegOrMyth"
+              />
+            </div>
+          </v-col>
+          <v-col v-if="isPokemonGuessed" class="d-flex flex-column justify-center">
+            <v-img
+              max-height="150"
+              max-width="150"
+              style="left: -35%; top: -10%"
+              :src="pokemonToGuess.sprite"
+            ></v-img>
+          </v-col>
+          <v-col v-if="isPokemonGuessed" class="d-flex flex-row justify-end">
+            <v-btn small @click="playAgain()">
+              <span>Play again</span>
+            </v-btn>
+          </v-col>
         </v-row>
       </v-container>
     </v-img>
-    <v-row no-gutters v-if="pokemonToGuess" class="justify-center mb-4" style="gap: 8px">
-      <div v-for="(type, i) in pokemonToGuess.types" :key="i">
-        <ChipGuessType :guessType="type" :answersTypes="answersTypes" :number="i+1" />
-      </div>
-      <ChipGuessColor
-        :guessColor="pokemonToGuess.color"
-        :answersColor="answersColor"
-      />
-      <ChipGuessGen
-        :guessGen="pokemonToGuess.generation"
-        :answersGen="answersGen"
-      />
-      <ChipGuessIsEvo
-        :guessIsEvo="pokemonToGuess.is_evolution"
-        :answersIsEvo="answersIsEvo"
-      />
-      <ChipGuessIsLegOrMyth
-        :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
-        :answersIsLegOrMyth="answersIsLegOrMyth"
-      />
-    </v-row>
     <v-row v-if="!isPokemonGuessed" no-gutters class="align-end">
       <v-autocomplete
         v-model="pokemonNameToVerify"
@@ -50,12 +70,13 @@
         auto-select-first
         filled
         dense
+        :menu-props="{ closeOnContentClick: true, maxHeight: 134 }"
         color="dark"
-        ref="autocomplete"
         label="Nom du pokémon"
       >
         <template #item="{ item }">
           <v-list-item
+            dense
             class="d-flex"
             @click="verifyPokemon(item)"
             @keyup.enter="verifyPokemon(pokemonNameToVerify)"
@@ -191,9 +212,9 @@ export default {
     ChipAnswerID,
     ChipGuessType,
     ChipGuessColor,
-		ChipGuessGen,
-		ChipGuessIsEvo,
-		ChipGuessIsLegOrMyth
+    ChipGuessGen,
+    ChipGuessIsEvo,
+    ChipGuessIsLegOrMyth,
   },
   mixins: [],
   data() {
@@ -252,15 +273,15 @@ export default {
     answersColor() {
       return [...new Set(this.answers.map((x) => x.color))];
     },
-		answersGen() {
-			return [...new Set(this.answers.map((x) => x.generation))];
-		},
-		answersIsEvo() {
-			return [...new Set(this.answers.map((x) => x.is_evolution))];
-		},
-		answersIsLegOrMyth() {
-			return [...new Set(this.answers.map((x) => x.is_leg_or_myth))];
-		}
+    answersGen() {
+      return [...new Set(this.answers.map((x) => x.generation))];
+    },
+    answersIsEvo() {
+      return [...new Set(this.answers.map((x) => x.is_evolution))];
+    },
+    answersIsLegOrMyth() {
+      return [...new Set(this.answers.map((x) => x.is_leg_or_myth))];
+    },
   },
   methods: {
     playAgain() {
@@ -283,7 +304,6 @@ export default {
       }
     },
     async verifyPokemon(name) {
-      this.$refs.autocomplete.isMenuActive = false;
       this.loading = true;
 
       const alreadyVerified = this.answers.find((x) => x.french_name === name);
