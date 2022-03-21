@@ -21,9 +21,9 @@
         </v-row>
       </v-container>
     </v-img>
-    <v-row no-gutters v-if="pokemonToGuess" class="justify-space-between mb-4">
+    <v-row no-gutters v-if="pokemonToGuess" class="justify-center mb-4" style="gap: 8px">
       <div v-for="(type, i) in pokemonToGuess.types" :key="i">
-        <ChipGuessType :guessType="type" :answersTypes="answersTypes" />
+        <ChipGuessType :guessType="type" :answersTypes="answersTypes" :number="i+1" />
       </div>
       <ChipGuessColor
         :guessColor="pokemonToGuess.color"
@@ -70,7 +70,6 @@
       :headers="headers"
       :items="answers"
       item-class="spacing"
-      class="mt-2"
       hide-default-footer
       mobile-breakpoint="0"
     >

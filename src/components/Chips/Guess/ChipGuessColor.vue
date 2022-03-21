@@ -1,6 +1,6 @@
 <template>
   <v-chip color="grey" small class="px-2">
-    <span>{{ answersColor.includes(guessColor) ? guessColor : '?' }}</span>
+    <span>{{ answersColor.includes(guessColor) ? guessColor : 'Couleur ?' }}</span>
   </v-chip>
 </template>
 

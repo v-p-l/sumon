@@ -1,6 +1,6 @@
 <template>
   <v-chip color="grey" small class="px-2">
-    <span>Gen {{ answersGen.includes(guessGen) ? guessGen : '?' }}</span>
+    <span>{{ answersGen.includes(guessGen) ? 'Génération ' + guessGen : 'Génération ?' }}</span>
   </v-chip>
 </template>
 
