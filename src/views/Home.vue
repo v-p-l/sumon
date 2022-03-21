@@ -18,29 +18,23 @@
             style="left: 8%"
             :src="pokemonToGuess.sprite"
           ></v-img>
-          <v-avatar
-            v-else
-            size="100"
-            style="top: 10%; left: 15%"
-            color="black"
-          ></v-avatar>
         </v-row>
       </v-container>
     </v-img>
-    <v-row v-if="!isPokemonGuessed" no-gutters class="align-center">
-      <v-text-field
+    <v-row v-if="!isPokemonGuessed" no-gutters class="align-end">
+      <v-autocomplete
         v-model="pokemonNameToVerify"
-        outlined
-        dense
-        hide-details
-        type="text"
+        :items="pokemonNameFR"
+				hide-details
+				auto-select-first
         label="Nom du pokémon"
-        class="mr-2"
-        @keyup.enter="verifyPokemon(pokemonNameToVerify.toLowerCase())"
-      ></v-text-field>
+				color="primary"
+				class="mr-2"
+				@keyup.enter="verifyPokemon(pokemonNameToVerify)"
+      ></v-autocomplete>
       <v-btn
         color="primary"
-        @click="verifyPokemon(pokemonNameToVerify.toLowerCase())"
+        @click="verifyPokemon(pokemonNameToVerify)"
       >
         <v-icon v-if="!loading" color="white">mdi-arrow-left-bottom</v-icon>
         <IconLoading v-else />
@@ -101,7 +95,7 @@
         />
       </template>
     </v-data-table>
-    <v-dialog v-model="dialogEndGame" width="450">
+    <v-dialog v-if="pokemonToGuess != null" v-model="dialogEndGame" width="450">
       <v-card class="pa-5">
         <v-row no-gutters class="justify-center">
           <v-col cols="12">
@@ -150,6 +144,7 @@ import ChipColor from "@/components/Chips/ChipColor.vue";
 import ChipGeneration from "@/components/Chips/ChipGeneration.vue";
 import ChipIsEvolution from "@/components/Chips/ChipIsEvolution.vue";
 import ChipIsLegOrMyth from "@/components/Chips/ChipIsLegOrMyth.vue";
+import PokemonNames from "@/traductions/pokemons.json";
 import IconLoading from "@/components/Icons/IconLoading.vue";
 
 export default {
@@ -201,10 +196,12 @@ export default {
         defaultSize: 6,
       },
       dialogEndGame: false,
+			pokemonNameFR: []
     };
   },
   mounted() {
-    this.test();
+    this.generatePokemon();
+		this.loadPokemonNameFR();
   },
   computed: {
     isPokemonGuessed() {
@@ -242,8 +239,7 @@ export default {
       }
 
       try {
-        const translatedPokemonName = await PokeAPI.translatePokemonName(name);
-        const id = await PokeAPI.getPokemonIDByName(translatedPokemonName);
+        const id = await PokeAPI.pokemonFrenchNameToID(name);
         const answer = await PokeAPI.getPokemonByID(id);
         this.answers.unshift(answer);
         this.loading = false;
@@ -257,6 +253,11 @@ export default {
     playConfetti() {
       this.$confetti.start();
     },
+		loadPokemonNameFR() {
+			for (let i = 0; i < PokemonNames.length; i++) {
+				this.pokemonNameFR.push(PokemonNames[i].fr)
+			}
+		}
   },
   watch: {
     isPokemonGuessed(newValue) {

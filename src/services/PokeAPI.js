@@ -55,24 +55,12 @@ export default {
 				throw err;
 			})
 	},
-	async getPokemonIDByName(name) {
-		return API(url)
-			.get('/pokemon/' + name)
-			.then((res) => {
-				const { id } = res.data;
-				return id ;
-			})
-			.catch((err) => {
-				console.log(err)
-				throw err
-			})
-	},
-	async translatePokemonName(name) {
+	async pokemonFrenchNameToID(name) {
 		const pokemonName = PokemonNames.find(x => x.fr === name);
 		if (pokemonName) {
-			return pokemonName.en;
+			return pokemonName.id;
 		} else {
 			throw "Ce pokémon n'existe pas.";
 		}
-	},
+	}
 }
