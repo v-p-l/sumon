@@ -1,6 +1,6 @@
 <template>
   <v-chip :color="isValid ? 'green' : 'grey'" small class="px-2">
-		<span>{{ isEvolution ? "oui" : "non" }}</span>
+		<span>{{ id }}</span>
   </v-chip>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   props: {
     isValid: Boolean,
-    isEvolution: Boolean,
+    id: Number,
   },
   data() {
     return {};

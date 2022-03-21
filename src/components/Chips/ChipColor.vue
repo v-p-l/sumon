@@ -1,5 +1,5 @@
 <template>
-  <v-chip :color="isValid ? 'green' : 'grey'" small>
+  <v-chip :color="isValid ? 'green' : 'grey'" small class="px-2">
     <span>{{ translateColor(pokemonColor) }}</span>
   </v-chip>
 </template>

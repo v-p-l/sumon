@@ -25,6 +25,7 @@
       <v-autocomplete
         v-model="pokemonNameToVerify"
         :items="pokemonNameFR"
+				:disabled="loading"
         hide-details
         auto-select-first
 				ref="regzerge"
@@ -62,6 +63,14 @@
           <v-img :src="item.sprite"></v-img>
         </v-avatar>
       </template>
+      <!-- Pokedex number -->
+      <template v-slot:[`item.id`]="{ item }">
+        <ChipID
+          :isValid="item.id === pokemonToGuess.id"
+          :id="item.id"
+        />
+      </template>
+      <!-- Is evolution -->
       <!-- Types -->
       <template v-slot:[`item.types`]="{ item }">
         <div class="d-flex flex-column" style="gap: 4px">
@@ -146,6 +155,7 @@
 
 <script>
 import PokeAPI from "@/services/PokeAPI";
+import ChipID from "@/components/Chips/ChipID.vue";
 import ChipType from "@/components/Chips/ChipType.vue";
 import ChipColor from "@/components/Chips/ChipColor.vue";
 import ChipGeneration from "@/components/Chips/ChipGeneration.vue";
@@ -163,6 +173,7 @@ export default {
     ChipIsEvolution,
     ChipIsLegOrMyth,
     IconLoading,
+		ChipID
   },
   mixins: [],
   data() {
@@ -171,6 +182,7 @@ export default {
       answers: [],
       headers: [
         { text: "Sprite", value: "sprite", sortable: false },
+        { text: "N°", value: "id", sortable: false },
         { text: "Type(s)", value: "types", sortable: false },
         { text: "Couleur", value: "color", sortable: false },
         {
@@ -184,7 +196,7 @@ export default {
           sortable: false,
         },
         {
-          text: "Leg. ou myth.",
+          text: "Leg/myth.",
           value: "is_leg_or_myth",
           sortable: false,
         },
@@ -295,6 +307,6 @@ export default {
   padding: 8px 6px 8px 0 !important;
 }
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td:first-child {
-  padding: 8px 6px 8px 0 !important;
+  padding: 8px 0 8px 0 !important;
 }
 </style>
