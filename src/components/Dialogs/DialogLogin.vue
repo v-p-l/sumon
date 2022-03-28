@@ -2,8 +2,8 @@
   <v-dialog v-model="dialog" width="450">
     <v-card class="pa-5">
       <!-- logo -->
-      <v-card-title class="d-flex align-center justify-center py-5">
-        <Logo />
+      <v-card-title class="d-flex align-center justify-center text-h4 py-5">
+        {{ tab === 0 ? "Sign in" : "Sign up" }}
       </v-card-title>
 
       <!-- tabs -->
@@ -15,11 +15,12 @@
       <v-tabs-items v-model="tab">
         <v-tab-item key="login">
           <!-- login form -->
-          <v-card-text class="pb-0">
+          <v-card-text class="pt-1 pb-0">
             <v-form>
               <v-text-field
                 v-model="login.email"
                 outlined
+                dense
                 label="Email"
                 placeholder="john@vuetify.com"
                 hide-details
@@ -29,6 +30,7 @@
               <v-text-field
                 v-model="login.password"
                 outlined
+                dense
                 :type="login.isPasswordVisible ? 'text' : 'password'"
                 label="Password"
                 placeholder="············"
@@ -57,6 +59,7 @@
 
               <v-btn
                 block
+                depressed
                 color="primary"
                 class="mt-6 mb-1"
                 @click="handleLoginWithEmail(login.email, login.password)"
@@ -84,7 +87,7 @@
 
           <!-- social links -->
           <v-card-actions class="d-flex justify-center px-4 py-2">
-            <v-btn class="pa-4" @click="handleLoginWithGoogle()">
+            <v-btn class="pa-5" @click="handleLoginWithGoogle()">
               <v-icon color="#db4437" class="mr-4"> mdi-google </v-icon>
               <span>Continue with Google</span>
             </v-btn>
@@ -92,11 +95,12 @@
         </v-tab-item>
         <v-tab-item key="signup">
           <!-- sign up form -->
-          <v-card-text class="pb-0">
+          <v-card-text class="pt-1 pb-0">
             <v-form>
               <v-text-field
                 v-model="signUp.username"
                 outlined
+                dense
                 label="Username"
                 placeholder="john84"
                 hide-details
@@ -106,6 +110,7 @@
               <v-text-field
                 v-model="signUp.email"
                 outlined
+                dense
                 label="Email"
                 placeholder="john@vuetify.com"
                 hide-details
@@ -115,6 +120,7 @@
               <v-text-field
                 v-model="signUp.password"
                 outlined
+                dense
                 :type="signUp.isPasswordVisible ? 'text' : 'password'"
                 label="Password"
                 placeholder="············"
@@ -131,6 +137,7 @@
 
               <v-btn
                 block
+                depressed
                 color="primary"
                 class="mt-6 mb-1"
                 @click="
@@ -164,7 +171,7 @@
 
           <!-- social links -->
           <v-card-actions class="d-flex justify-center px-4 py-2">
-            <v-btn class="pa-4" @click="handleLoginWithGoogle()">
+            <v-btn class="pa-5" @click="handleLoginWithGoogle()">
               <v-icon color="#db4437" class="mr-4"> mdi-google </v-icon>
               <span>Continue with Google</span>
             </v-btn>
@@ -178,12 +185,10 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 import IconLoading from "@/components/Icons/IconLoading.vue";
-import Logo from "@/components/Logo/Logo.vue";
 
 export default {
   components: {
     IconLoading,
-    Logo,
   },
   data() {
     return {

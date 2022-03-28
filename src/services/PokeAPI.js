@@ -8,28 +8,9 @@ const url = "https://pokeapi.co/api/v2";
 function filterTypes(array) {
 	let types = [];
 	for (let i = 0; i < array.length; i++) {
-		let translatedType = translateType(array[i].type.name);
-		types.push(translatedType);
+		types.push(array[i].type.name);
 	}
 	return types;
-}
-
-function translateType(pokemonType) {
-	const type = PokemonTypes.find((x) => x.en === pokemonType);
-	if (type) {
-		return type.fr;
-	} else {
-		throw "Ce type n'existe pas.";
-	}
-}
-
-function translateColor(color) {
-	const pokemonColor = PokemonColors.find((x) => x.en === color);
-	if (pokemonColor) {
-		return pokemonColor.fr;
-	} else {
-		throw "Cette couleur n'existe pas.";
-	}
 }
 
 function transformGen(gen) {
@@ -66,7 +47,7 @@ export default {
 	async getPokemonByID(id) {
 		const { types, sprite } = await this.getPokemonDefaultDataByID(id);
 		const	{ is_leg_or_myth, french_name, color, generation, is_evolution } = await this.getPokemonSpeciesByID(id);
-		return { id, types, sprite, is_leg_or_myth, french_name, color, generation, is_evolution };
+		return { id, types, color, generation, is_evolution, is_leg_or_myth, french_name, sprite };
 	},
 	async getPokemonDefaultDataByID(id) {
 		return API(url)
@@ -87,7 +68,7 @@ export default {
 			.then((res) => {
 				const is_leg_or_myth = res.data.is_legendary || res.data.is_mythical;
 				const french_name = res.data.names[4].name; // 4 = French
-				const color = translateColor(res.data.color.name);
+				const color = res.data.color.name;
 				const generation = transformGen(res.data.generation.name);
 				const is_evolution = res.data.evolves_from_species != null;
 				return { is_leg_or_myth, french_name, color, generation, is_evolution };
@@ -103,6 +84,30 @@ export default {
 			return pokemonName.id;
 		} else {
 			throw "Ce pokémon n'existe pas.";
+		}
+	},
+	translateColor(color) {
+		const pokemonColor = PokemonColors.find((x) => x.en === color);
+		if (pokemonColor) {
+			return pokemonColor.fr;
+		} else {
+			throw "Cette couleur n'existe pas.";
+		}
+	},
+	translateType(pokemonType) {
+		const type = PokemonTypes.find((x) => x.en === pokemonType);
+		if (type) {
+			return type.fr;
+		} else {
+			throw "Ce type n'existe pas.";
+		}
+	},
+	typeToColor(pokemonType) {
+		const type = PokemonTypes.find((x) => x.en === pokemonType);
+		if (type) {
+			return type.color;
+		} else {
+			throw "Ce type n'existe pas.";
 		}
 	}
 }

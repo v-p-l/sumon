@@ -5,6 +5,7 @@ import router from "@/router";
 import store from "@/store";
 import vuetify from "@/plugins/vuetify";
 import confetti from "@/plugins/confetti";
+import vueclipboard from "@/plugins/vueclipboard";
 // import { initializeApp } from "firebase/app";
 // import firebaseConfig from "@/plugins/firebaseConfig.js";
 
@@ -17,5 +18,6 @@ new Vue({
   store,
   vuetify,
 	confetti,
+  vueclipboard,
   render: h => h(App)
 }).$mount('#app')

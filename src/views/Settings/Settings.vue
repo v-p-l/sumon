@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import SettingsAccount from "@/views/Settings/SettingsAccount.vue";
-import SettingsSecurity from "@/views/Settings/SettingsSecurity.vue";
+import SettingsAccount from "@/views/Settings/components/SettingsAccount.vue";
+import SettingsSecurity from "@/views/Settings/components/SettingsSecurity.vue";
 
 export default {
   components: {

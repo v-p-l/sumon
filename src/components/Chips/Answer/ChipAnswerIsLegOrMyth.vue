@@ -1,6 +1,8 @@
 <template>
-  <v-chip :color="guessIsLegOrMyth === answerIsLegOrMyth ? 'green' : 'grey'" small class="px-2">
-    <span>{{ answerIsLegOrMyth ? "oui" : "non" }}</span>
+  <v-chip :color="isGuessFound ? 'green' : 'grey'" small class="px-2">
+    <span :class="isGuessFound ? 'white--text' : 'black--text'">
+      {{ answerIsLegOrMyth ? "Oui" : "Non" }}
+    </span>
   </v-chip>
 </template>
 
@@ -10,5 +12,10 @@ export default {
     guessIsLegOrMyth: Boolean,
     answerIsLegOrMyth: Boolean,
   },
+  computed: {
+    isGuessFound() {
+      return this.guessIsLegOrMyth === this.answerIsLegOrMyth;
+    },
+  }
 };
 </script>

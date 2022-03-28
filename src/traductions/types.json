@@ -1,74 +1,92 @@
 [
   {
     "en": "normal",
-    "fr": "normal"
+    "fr": "normal",
+    "color": "#A9A67B"
   },
   {
     "en": "fighting",
-    "fr": "combat"
+    "fr": "combat",
+    "color": "#C22F28"
   },
   {
     "en": "flying",
-    "fr": "vol"
+    "fr": "vol",
+    "color": "#AA8CFF"
   },
   {
     "en": "poison",
-    "fr": "poison"
+    "fr": "poison",
+    "color": "#A23EA0"
   },
   {
     "en": "ground",
-    "fr": "sol"
+    "fr": "sol",
+    "color": "#E2BF65"
   },
   {
     "en": "rock",
-    "fr": "roche"
+    "fr": "roche",
+    "color": "#B6A03A"
   },
   {
     "en": "bug",
-    "fr": "insecte"
+    "fr": "insecte",
+    "color": "#A5B91A"
   },
   {
     "en": "ghost",
-    "fr": "spectre"
+    "fr": "spectre",
+    "color": "#745797"
   },
   {
     "en": "steel",
-    "fr": "acier"
+    "fr": "acier",
+    "color": "#B7B8CD"
   },
   {
     "en": "fire",
-    "fr": "feu"
+    "fr": "feu",
+    "color": "#EF802E"
   },
   {
     "en": "water",
-    "fr": "eau"
+    "fr": "eau",
+    "color": "#658CFD"
   },
   {
     "en": "grass",
-    "fr": "plante"
+    "fr": "plante",
+    "color": "#7BC74B"
   },
   {
     "en": "electric",
-    "fr": "electrik"
+    "fr": "electrik",
+    "color": "#F2D421"
   },
   {
     "en": "psychic",
-    "fr": "psy"
+    "fr": "psy",
+    "color": "#F45586"
   },
   {
     "en": "ice",
-    "fr": "glace"
+    "fr": "glace",
+    "color": "#97D9D7"
   },
   {
     "en": "dragon",
-    "fr": "dragon"
+    "fr": "dragon",
+    "color": "#7134FC"
   },
   {
     "en": "dark",
-    "fr": "ténèbres"
+    "fr": "ténèbres",
+    "color": "#715746"
   },
   {
     "en": "fairy",
-    "fr": "fée"
+    "fr": "fée",
+    "color": "#D685AD"
   }
 ]

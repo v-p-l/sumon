@@ -1,7 +1,7 @@
 <template>
   <v-footer app inset absolute>
     <v-col cols="12">
-      2022 — <strong>Vuetify</strong>
+      2022 — <strong>Sumon</strong>
     </v-col>
   </v-footer>
 </template>
