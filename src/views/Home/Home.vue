@@ -91,8 +91,8 @@
     </v-autocomplete>
     <small class="red--text">{{ verifyError }}</small>
     <TableAnswers :answers="answers" :pokemonToGuess="pokemonToGuess" />
-    <v-dialog v-if="pokemonToGuess" v-model="dialogEndGame" width="450">
-      <v-card class="pa-5">
+    <v-dialog v-if="pokemonToGuess" v-model="dialogEndGame" width="400">
+      <v-card class="py-5">
         <v-row no-gutters class="justify-center">
           <v-col cols="12">
             <v-card-title class="justify-center pa-0 mb-4">{{
@@ -108,49 +108,43 @@
               class="mx-auto"
               :src="pokemonToGuess.sprite"
             ></v-img>
-            <v-col cols="12" class="pa-2 pb-4">
-              <v-row
-                no-gutters
-                class="justify-center mb-1 px-2"
-                style="gap: 8px"
-              >
-                <div v-for="(type, i) in pokemonToGuess.types" :key="i">
-                  <ChipGuessType
-                    :guessType="type"
-                    :answersTypes="pokemonToGuess.types"
-                    :number="i + 1"
-                  />
-                </div>
-                <div>
-                  <ChipGuessColor
-                    :guessColor="pokemonToGuess.color"
-                    :answersColor="[pokemonToGuess.color]"
-                  />
-                </div>
-              </v-row>
-              <v-row no-gutters class="justify-center px-2" style="gap: 8px">
-                <div>
-                  <ChipGuessGen
-                    :guessGen="pokemonToGuess.generation"
-                    :answersGen="[pokemonToGuess.generation]"
-                  />
-                </div>
-                <div>
-                  <ChipGuessIsEvo
-                    :guessIsEvo="pokemonToGuess.is_evolution"
-                    :answersIsEvo="[pokemonToGuess.is_evolution]"
-                  />
-                </div>
-                <div>
-                  <ChipGuessIsLegOrMyth
-                    :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
-                    :answersIsLegOrMyth="[pokemonToGuess.is_leg_or_myth]"
-                  />
-                </div>
-              </v-row>
-            </v-col>
+            <v-row no-gutters class="justify-center px-4 mb-2" style="gap: 8px">
+              <div v-for="(type, i) in pokemonToGuess.types" :key="i">
+                <ChipGuessType
+                  :guessType="type"
+                  :answersTypes="pokemonToGuess.types"
+                  :number="i + 1"
+                />
+              </div>
+              <div>
+                <ChipGuessColor
+                  :guessColor="pokemonToGuess.color"
+                  :answersColor="[pokemonToGuess.color]"
+                />
+              </div>
+            </v-row>
+            <v-row no-gutters class="justify-center px-4 mb-4" style="gap: 8px">
+              <div>
+                <ChipGuessGen
+                  :guessGen="pokemonToGuess.generation"
+                  :answersGen="[pokemonToGuess.generation]"
+                />
+              </div>
+              <div>
+                <ChipGuessIsEvo
+                  :guessIsEvo="pokemonToGuess.is_evolution"
+                  :answersIsEvo="[pokemonToGuess.is_evolution]"
+                />
+              </div>
+              <div>
+                <ChipGuessIsLegOrMyth
+                  :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
+                  :answersIsLegOrMyth="[pokemonToGuess.is_leg_or_myth]"
+                />
+              </div>
+            </v-row>
             <v-divider class="mb-4"></v-divider>
-            <v-row no-gutters class="justify-space-between align-center">
+            <v-row no-gutters class="justify-space-between align-center px-4 mb-2">
               <div class="text-center">
                 {{
                   "Sumon #" +
@@ -167,7 +161,7 @@
                 <span>Copier</span>
               </v-btn>
             </v-row>
-            <div v-for="(rowStats, i) in globalStats" :key="i">
+            <div v-for="(rowStats, i) in globalStats" :key="i" class="px-4">
               {{ rowStats }}
             </div>
           </v-col>
