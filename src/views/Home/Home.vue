@@ -1,16 +1,16 @@
 <template>
   <v-container style="max-width: 400px" class="pa-0">
     <v-card v-if="pokemonToGuess" class="mb-4">
-        <v-row no-gutters class="justify-center pa-2">
-          <v-img
-            max-height="150"
-            max-width="150"
-            :src="pokemonToGuess.sprite"
-            :style="isPokemonGuessed ? '' : 'filter: blur(15px);'"
-          ></v-img>
-        </v-row>
-        <v-divider></v-divider>
-        <v-col cols="12" class="pa-2">
+      <v-row no-gutters class="justify-center pa-2">
+        <v-img
+          max-height="100"
+          max-width="100"
+          :src="pokemonToGuess.sprite"
+          :style="isPokemonGuessed ? '' : 'filter: blur(15px);'"
+        ></v-img>
+      </v-row>
+      <v-divider></v-divider>
+      <v-col cols="12" class="pa-2">
         <v-row no-gutters class="justify-center mb-1 px-2" style="gap: 8px">
           <div v-for="(type, i) in pokemonToGuess.types" :key="i">
             <ChipGuessType
@@ -46,8 +46,8 @@
             />
           </div>
         </v-row>
-        </v-col>
-        <v-fade-transition>
+      </v-col>
+      <v-fade-transition>
         <v-overlay
           v-if="gameEnd"
           absolute
@@ -62,19 +62,20 @@
             </v-btn>
           </v-row>
         </v-overlay>
-        </v-fade-transition>
+      </v-fade-transition>
     </v-card>
     <v-autocomplete
       v-if="!gameEnd"
       v-model="pokemonNameToVerify"
       :items="pokemonNamesFR"
       hide-details
-      auto-select-first
+      flat
+      hide-no-data
       filled
       dense
-      :menu-props="{ closeOnContentClick: true, maxHeight: 134 }"
-      color="dark"
+      :menu-props="{ closeOnContentClick: true, maxHeight: 96 }"
       :label="'Nom du pokémon (' + answers.length + '/' + limitTry + ')'"
+      color="dark"
     >
       <template #item="{ item }">
         <v-list-item
