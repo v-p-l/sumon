@@ -49,7 +49,7 @@
       </v-col>
       <v-fade-transition>
         <v-overlay
-          v-if="gameEnd"
+          v-if="isGameEnded"
           absolute
           :color="isPokemonGuessed ? 'green' : 'red'"
         >
@@ -65,7 +65,7 @@
       </v-fade-transition>
     </v-card>
     <v-autocomplete
-      v-if="!gameEnd"
+      v-if="!isGameEnded"
       v-model="pokemonNameToVerify"
       :items="pokemonNamesFR"
       hide-details
@@ -73,6 +73,7 @@
       hide-no-data
       filled
       dense
+      auto-select-first
       :menu-props="{ closeOnContentClick: true, maxHeight: 96 }"
       :label="'Nom du pokémon (' + answers.length + '/' + limitTry + ')'"
       color="dark"
@@ -107,6 +108,47 @@
               class="mx-auto"
               :src="pokemonToGuess.sprite"
             ></v-img>
+            <v-col cols="12" class="pa-2 pb-4">
+              <v-row
+                no-gutters
+                class="justify-center mb-1 px-2"
+                style="gap: 8px"
+              >
+                <div v-for="(type, i) in pokemonToGuess.types" :key="i">
+                  <ChipGuessType
+                    :guessType="type"
+                    :answersTypes="pokemonToGuess.types"
+                    :number="i + 1"
+                  />
+                </div>
+                <div>
+                  <ChipGuessColor
+                    :guessColor="pokemonToGuess.color"
+                    :answersColor="[pokemonToGuess.color]"
+                  />
+                </div>
+              </v-row>
+              <v-row no-gutters class="justify-center px-2" style="gap: 8px">
+                <div>
+                  <ChipGuessGen
+                    :guessGen="pokemonToGuess.generation"
+                    :answersGen="[pokemonToGuess.generation]"
+                  />
+                </div>
+                <div>
+                  <ChipGuessIsEvo
+                    :guessIsEvo="pokemonToGuess.is_evolution"
+                    :answersIsEvo="[pokemonToGuess.is_evolution]"
+                  />
+                </div>
+                <div>
+                  <ChipGuessIsLegOrMyth
+                    :guessIsLegOrMyth="pokemonToGuess.is_leg_or_myth"
+                    :answersIsLegOrMyth="[pokemonToGuess.is_leg_or_myth]"
+                  />
+                </div>
+              </v-row>
+            </v-col>
             <v-divider class="mb-4"></v-divider>
             <v-row no-gutters class="justify-space-between align-center">
               <div class="text-center">
@@ -204,7 +246,7 @@ export default {
     answersLength() {
       return this.answers.length;
     },
-    gameEnd() {
+    isGameEnded() {
       if (this.isPokemonGuessed || this.answersLength === 6) {
         return true;
       } else {
@@ -306,7 +348,7 @@ export default {
     },
   },
   watch: {
-    gameEnd(newValue) {
+    isGameEnded(newValue) {
       if (newValue) {
         this.generateStats();
         this.dialogEndGame = true;

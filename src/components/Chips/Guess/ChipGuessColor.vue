@@ -11,7 +11,7 @@ import PokeAPI from "@/services/PokeAPI";
 export default {
   props: {
 		guessColor: String,
-		answersColor: Array
+		answersColor: Array,
   },
   computed: {
     isGuessFound() {
