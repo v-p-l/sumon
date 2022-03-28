@@ -1,24 +1,16 @@
 <template>
   <v-container style="max-width: 400px" class="pa-0">
     <v-card v-if="pokemonToGuess" class="mb-4">
-      <v-row no-gutters class="justify-end pa-2">
-        <v-btn small class="mr-2" @click="playAgain()">
-          <span>Play again</span>
-        </v-btn>
-        <v-btn small @click="dialogEndGame = true">
-          <span>See stats</span>
-        </v-btn>
-      </v-row>
-      <v-row no-gutters class="justify-center pa-2">
-        <v-img
-          max-height="100"
-          max-width="100"
-          :src="pokemonToGuess.sprite"
-          :style="isPokemonGuessed ? '' : 'filter: blur(15px);'"
-        ></v-img>
-      </v-row>
-      <v-divider></v-divider>
-      <v-col cols="12" class="pa-2">
+        <v-row no-gutters class="justify-center pa-2">
+          <v-img
+            max-height="150"
+            max-width="150"
+            :src="pokemonToGuess.sprite"
+            :style="isPokemonGuessed ? '' : 'filter: blur(15px);'"
+          ></v-img>
+        </v-row>
+        <v-divider></v-divider>
+        <v-col cols="12" class="pa-2">
         <v-row no-gutters class="justify-center mb-1 px-2" style="gap: 8px">
           <div v-for="(type, i) in pokemonToGuess.types" :key="i">
             <ChipGuessType
@@ -54,7 +46,23 @@
             />
           </div>
         </v-row>
-      </v-col>
+        </v-col>
+        <v-fade-transition>
+        <v-overlay
+          v-if="gameEnd"
+          absolute
+          :color="isPokemonGuessed ? 'green' : 'red'"
+        >
+          <v-row no-gutters class="justify-end pa-2">
+            <v-btn color="white" small class="mr-2" @click="playAgain()">
+              <span class="black--text">Nouvelle partie</span>
+            </v-btn>
+            <v-btn color="white" small @click="dialogEndGame = true">
+              <span class="black--text">Statistiques</span>
+            </v-btn>
+          </v-row>
+        </v-overlay>
+        </v-fade-transition>
     </v-card>
     <v-autocomplete
       v-if="!gameEnd"
@@ -81,21 +89,16 @@
     </v-autocomplete>
     <small class="red--text">{{ verifyError }}</small>
     <TableAnswers :answers="answers" :pokemonToGuess="pokemonToGuess" />
-    <v-dialog v-if="pokemonToGuess != null" v-model="dialogEndGame" width="450">
+    <v-dialog v-if="pokemonToGuess" v-model="dialogEndGame" width="450">
       <v-card class="pa-5">
         <v-row no-gutters class="justify-center">
           <v-col cols="12">
-            <v-card-title class="justify-center pa-0 mb-4"
-              >{{ isPokemonGuessed ? 'GG ! 😄' : `Dommage... 😞`}}</v-card-title
-            >
-            <v-card-text
-              class="
-                d-flex
-                flex-row
-                justify-center
-                pb-0
-              "
-              >Le pokémon à deviner était {{ pokemonToGuess.french_name }}</v-card-text
+            <v-card-title class="justify-center pa-0 mb-4">{{
+              isPokemonGuessed ? "GG ! 😄" : `Dommage... 😞`
+            }}</v-card-title>
+            <v-card-text class="d-flex flex-row justify-center pb-0"
+              >Le pokémon à deviner était
+              {{ pokemonToGuess.french_name }}</v-card-text
             >
             <v-img
               max-height="100"
@@ -175,7 +178,7 @@ export default {
     };
   },
   mounted() {
-    this.test();
+    this.generatePokemon();
     this.loadPokemonNamesFR();
   },
   computed: {
@@ -209,10 +212,6 @@ export default {
     },
   },
   methods: {
-    playAgain() {
-      this.generatePokemon();
-      this.answers = [];
-    },
     async test() {
       try {
         this.pokemonToGuess = await PokeAPI.getPokemonByID(149);
@@ -221,8 +220,10 @@ export default {
       }
     },
     async generatePokemon() {
+      this.loading = true;
       try {
         this.pokemonToGuess = await PokeAPI.generateRandomPokemon();
+        this.loading = false;
       } catch (err) {
         this.error = err;
         console.log(err);
@@ -297,6 +298,10 @@ export default {
       this.$copyText(text, container).then(() => {
         console.log("copied!");
       });
+    },
+    playAgain() {
+      this.generatePokemon();
+      this.answers = [];
     },
   },
   watch: {
