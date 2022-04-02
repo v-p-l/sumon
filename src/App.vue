@@ -12,6 +12,7 @@ import LayoutContent from "@/layouts/Content.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  name: "Sumon",
   components: {
     LayoutBlank,
     LayoutContent,
