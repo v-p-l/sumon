@@ -40,7 +40,7 @@ async function generateRandomID(max) {
 
 export default {
 	async generateRandomPokemon() {
-		const id = await generateRandomID(381);
+		const id = await generateRandomID(151);
 		const data = await this.getPokemonByID(id);
 		return data;
 	},

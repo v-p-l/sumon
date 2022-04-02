@@ -94,7 +94,7 @@ export default {
           sortable: false,
         },
         {
-          text: "Evo.",
+          text: "Evolution",
           value: "is_evolution",
           sortable: false,
         },

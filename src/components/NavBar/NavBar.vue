@@ -62,12 +62,12 @@ export default {
           to: "/",
           authRequired: false,
         },
-        {
-          title: "Stats",
-          icon: "mdi-chart-line",
-          to: "/stats",
-          authRequired: true,
-        },
+        // {
+        //   title: "Stats",
+        //   icon: "mdi-chart-line",
+        //   to: "/stats",
+        //   authRequired: true,
+        // },
       ],
       selectedItem: 1,
     };

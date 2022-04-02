@@ -5,11 +5,16 @@ import router from "@/router";
 import store from "@/store";
 import vuetify from "@/plugins/vuetify";
 import confetti from "@/plugins/confetti";
+import moment from "@/plugins/moment";
 import vueclipboard from "@/plugins/vueclipboard";
-// import { initializeApp } from "firebase/app";
-// import firebaseConfig from "@/plugins/firebaseConfig.js";
+import firebaseConfig from "@/plugins/firebase/firebaseConfig";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-// initializeApp(firebaseConfig);
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+export default db;
 
 Vue.config.productionTip = false
 
@@ -19,5 +24,6 @@ new Vue({
   vuetify,
 	confetti,
   vueclipboard,
+  moment,
   render: h => h(App)
 }).$mount('#app')
