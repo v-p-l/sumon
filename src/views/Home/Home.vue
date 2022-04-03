@@ -17,7 +17,7 @@
       filled
       dense
       auto-select-first
-      :menu-props="{ closeOnContentClick: true }"
+      :menu-props="{ closeOnContentClick: true, maxHeight: 136 }"
       :label="'Nom du pokémon (' + challengeOfTheDayAnswers.length + '/' + limitTry + ')'"
       color="dark"
     >
