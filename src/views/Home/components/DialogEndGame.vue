@@ -8,7 +8,7 @@
           }}</v-card-title>
           <v-card-text class="d-flex flex-row justify-center pb-0"
             >Le pokémon à deviner était
-            {{ pokemonToGuess.french_name }}</v-card-text
+            {{ pokemonToGuess.french_name }}.</v-card-text
           >
           <v-img
             max-height="100"
@@ -124,40 +124,22 @@ export default {
       },
     },
     globalStats() {
-      let globalStats = [];
-      for (let i = 0; i < this.answers.length; i++) {
-        let rowStats = "";
-        for (let property in this.answers[i]) {
-          if (property === "sprite" || property === "french_name") {
-            continue;
-          } else {
-            if (
-              JSON.stringify(this.answers[i][property]) ===
-              JSON.stringify(this.pokemonToGuess[property])
-            ) {
-              rowStats = rowStats + "🟩";
-            } else {
-              rowStats = rowStats + "⬜";
-            }
-          }
-        }
-        globalStats.push(rowStats);
-      }
-      return globalStats;
+      return this.generateStats(this.pokemonToGuess, this.answers);
     }
   },
   methods: {
-    generateStats() {
-      let globalStats = [];
-      for (let i = 0; i < this.answers.length; i++) {
+    generateStats(pokemonToGuess, answers) {
+      const globalStats = []
+
+      for (let i = 0; i < answers.length; i++) {
         let rowStats = "";
-        for (let property in this.answers[i]) {
+        for (let property in answers[i]) {
           if (property === "sprite" || property === "french_name") {
             continue;
           } else {
             if (
-              JSON.stringify(this.answers[i][property]) ===
-              JSON.stringify(this.pokemonToGuess[property])
+              JSON.stringify(answers[i][property]) ===
+              JSON.stringify(pokemonToGuess[property])
             ) {
               rowStats = rowStats + "🟩";
             } else {
@@ -167,7 +149,8 @@ export default {
         }
         globalStats.push(rowStats);
       }
-      this.globalStats = globalStats;
+
+      return globalStats;
     },
     copyStats() {
       const container = document.querySelector(".v-dialog");
@@ -192,13 +175,6 @@ export default {
         .catch((err) => {
           console.log(err)
         });
-    },
-  },
-  watch: {
-    isGameEnded(newValue) {
-      if (newValue) {
-        this.generateStats();
-      }
     },
   },
 };
