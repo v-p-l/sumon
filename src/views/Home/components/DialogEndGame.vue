@@ -157,7 +157,7 @@ export default {
 
       let text =
         "SUMON #" +
-        this.pokemonToGuess.id +
+        this.challengeOfTheDayID +
         " (" +
         this.answers.length +
         "/" +
