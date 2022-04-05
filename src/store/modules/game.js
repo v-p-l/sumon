@@ -40,6 +40,7 @@ const game = {
             state.challengeOfTheDay.id = payload.id;
             state.challengeOfTheDay.pokemonID = payload.pokemonID;
             state.challengeOfTheDay.lastUpdate = payload.timeNow;
+            state.challengeOfTheDay.answers = [];
         },
         addChallengeOfTheDayAnswer (state, payload) {
             state.challengeOfTheDay.answers.push(payload);
