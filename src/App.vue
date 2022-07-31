@@ -21,7 +21,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters("utilities", ["darkMode"]),
+    ...mapGetters("utilities", ["darkMode", "lang"]),
     resolveLayout() {
       if (this.$route.meta.layout === "blank" || this.$route.name === null) {
         return "layout-blank";
@@ -34,7 +34,7 @@ export default {
     this.darkMode === true
       ? (this.$vuetify.theme.dark = true)
       : (this.$vuetify.theme.dark = false);
-    await this.$store.dispatch("auth/onUserAuthStateChanged");
+    this.$i18n.locale = this.lang;
   },
 };
 </script>

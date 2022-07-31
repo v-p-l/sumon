@@ -1,7 +1,7 @@
 <template>
   <v-chip :color="isGuessFound ? 'grey lighten-3' : 'grey'" small class="px-2">
     <span class="black--text">
-      {{ isGuessFound ? (guessIsLegOrMyth === true ? 'Légendaire ou mythique' : 'Ni légendaire ni mythique') : 'Légendaire ou mythique' }}
+      {{ isGuessFound ? translatedIsLegOrMyth : $t('game.properties.is_leg_or_myth.title') }}
     </span>
   </v-chip>
 </template>
@@ -15,6 +15,9 @@ export default {
   computed: {
     isGuessFound() {
       return this.answersIsLegOrMyth.includes(this.guessIsLegOrMyth)
+    },
+    translatedIsLegOrMyth() {
+      return this.$t('game.properties.is_leg_or_myth.' + this.guessIsLegOrMyth);
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!loading" style="max-width: 600px" class="pa-0">
+  <v-container v-if="!loading" style="max-width: 1000px" class="pa-0">
     <CardPokemon
       :pokemonToGuess="pokemonToGuess"
       :answers="challengeOfTheDayAnswers"
@@ -10,7 +10,7 @@
     <v-autocomplete
       v-if="!challengeOfTheDayEnded"
       v-model="pokemonNameToVerify"
-      :items="pokemonNamesFR"
+      :items="pokemonsName"
       hide-details
       flat
       hide-no-data
@@ -18,22 +18,20 @@
       dense
       auto-select-first
       :menu-props="{ closeOnContentClick: true, maxHeight: 136 }"
-      :label="'Nom du pokémon (' + challengeOfTheDayAnswers.length + '/' + limitTry + ')'"
+      :label="$t('game.autocompleteLabel')"
       color="dark"
     >
       <template #item="{ item }">
-        <v-list-item
-          dense
-          class="d-flex"
-          @click="verifyPokemon(item)"
-          @keyup.enter="verifyPokemon(pokemonNameToVerify)"
-        >
+        <v-list-item dense class="d-flex" @click="verifyPokemon(item)">
           <div class="ml-2">{{ item }}</div>
         </v-list-item>
       </template>
     </v-autocomplete>
-    <small class="red--text">{{ verifyError }}</small>
-    <TableAnswers :answers="challengeOfTheDayAnswers" :pokemonToGuess="pokemonToGuess" />
+    <small v-if="alreadyVerifiedError" class="red--text">{{ $t('game.autocompleteErrors.alreadyVerified') }}</small>
+    <TableAnswers
+      :answers="challengeOfTheDayAnswers"
+      :pokemonToGuess="pokemonToGuess"
+    />
     <DialogEndGame
       v-model="showDialogEndGame"
       :pokemonToGuess="pokemonToGuess"
@@ -48,7 +46,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import PokeAPI from "@/services/PokeAPI";
-import PokemonNames from "@/traductions/pokemons.json";
+import PokemonsName from "@/traductions/pokemons.json";
 import CardPokemon from "@/views/Home/components/CardPokemon.vue";
 import TableAnswers from "@/views/Home/components/TableAnswers.vue";
 import DialogEndGame from "@/views/Home/components/DialogEndGame.vue";
@@ -66,9 +64,8 @@ export default {
       loading: true,
       pokemonToGuess: null,
       pokemonNameToVerify: "",
-      verifyError: "",
+      alreadyVerifiedError: false,
       limitTry: 6,
-      pokemonNamesFR: [],
       showDialogEndGame: false,
       particlesStyle: {
         particles: [
@@ -82,7 +79,6 @@ export default {
     };
   },
   async mounted() {
-    this.loadPokemonNamesFR();
     this.startGame();
   },
   computed: {
@@ -94,6 +90,10 @@ export default {
       "challengeOfTheDayGuessed",
       "lastUpdate",
     ]),
+    ...mapGetters("utilities", ["lang"]),
+    pokemonsName() {
+      return PokemonsName.map((x) => x[this.lang]);
+    },
   },
   methods: {
     ...mapActions("game", ["getChallengeOfTheDay"]),
@@ -106,40 +106,39 @@ export default {
           this.pokemonToGuess = await PokeAPI.getPokemonByID(id);
           this.loading = false;
         } catch (err) {
-          console.log(err)
+          console.log(err);
           this.loading = false;
         }
       } else {
         try {
-          this.pokemonToGuess = await PokeAPI.getPokemonByID(this.challengeOfTheDayPokemonID);
+          this.pokemonToGuess = await PokeAPI.getPokemonByID(
+            this.challengeOfTheDayPokemonID
+          );
           this.loading = false;
         } catch (err) {
-          console.log(err)
+          console.log(err);
           this.loading = false;
         }
       }
     },
     async verifyPokemon(name) {
-      const alreadyVerified = this.challengeOfTheDayAnswers.find((x) => x.french_name === name);
-
-      if (alreadyVerified) {
-        this.verifyError = "Pokémon déjà vérifié.";
-        return;
-      }
-
       try {
-        const id = await PokeAPI.pokemonFrenchNameToID(name);
+        const id = await PokeAPI.pokemonNameToID(name, this.lang);
+
+        const alreadyVerified = this.challengeOfTheDayAnswers.find(
+          (x) => x.id === id
+        );
+        if (alreadyVerified) {
+          this.alreadyVerifiedError = true;
+          return;
+        }
+
         const answer = await PokeAPI.getPokemonByID(id);
         this.addChallengeOfTheDayAnswer(answer);
         this.pokemonNameToVerify = "";
-        this.verifyError = "";
+        this.alreadyVerifiedError = false;
       } catch (err) {
-        this.verifyError = err;
-      }
-    },
-    loadPokemonNamesFR() {
-      for (let i = 0; i < PokemonNames.length; i++) {
-        this.pokemonNamesFR.push(PokemonNames[i].fr);
+        console.log(err);
       }
     },
   },

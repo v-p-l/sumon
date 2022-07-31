@@ -1,11 +1,9 @@
 <template>
-  <v-fade-transition mode="out-in">
-    <v-icon
-      @click="toggleDarkMode()"
-    >
+  <v-btn icon @click="toggleDarkMode()">
+    <v-icon>
       {{ darkMode ? "mdi-weather-sunny" : "mdi-weather-night" }}
     </v-icon>
-  </v-fade-transition>
+  </v-btn>
 </template>
 
 <script>
@@ -18,12 +16,12 @@ export default {
   computed: {
     ...mapGetters("utilities", ["darkMode"]),
   },
-	methods: {
-		...mapMutations("utilities", ["updateDarkMode"]),
-		toggleDarkMode() {
-			this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-			this.updateDarkMode();
-		}
-	}
+  methods: {
+    ...mapMutations("utilities", ["updateDarkMode"]),
+    toggleDarkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.updateDarkMode();
+    },
+  },
 };
 </script>

@@ -1,13 +1,12 @@
 <template>
-  <v-chip :color="isGuessFound ? guessColor : 'grey'" small class="px-2">
-    <span :class="isGuessFound ? 'white--text text-capitalize' : 'black--text'">
-      {{ isGuessFound ? translatedGuessColor : 'Couleur' }}
+  <v-chip :color="isGuessFound ? (guessColor === 'white' ? 'grey lighten-3' : guessColor) : 'grey'" small class="px-2">
+    <span :class="isGuessFound ? (guessColor === 'white' ? 'black--text text-capitalize' : 'white--text text-capitalize') : 'black--text'">
+      {{ isGuessFound ? translatedGuessColor : $t('game.properties.color.title') }}
     </span>
   </v-chip>
 </template>
 
 <script>
-import PokeAPI from "@/services/PokeAPI";
 export default {
   props: {
 		guessColor: String,
@@ -18,7 +17,7 @@ export default {
       return this.answersColor.includes(this.guessColor)
     },
     translatedGuessColor() {
-      return PokeAPI.translateColor(this.guessColor);
+      return this.$t('game.properties.color.' + this.guessColor);
     }
   }
 };

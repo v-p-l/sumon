@@ -8,7 +8,6 @@
         :style="isPokemonGuessed ? '' : 'filter: blur(15px);'"
       ></v-img>
     </v-row>
-    <v-divider></v-divider>
     <v-col cols="12" class="pa-2">
       <v-row no-gutters class="justify-center mb-1 px-2" style="gap: 8px">
         <div v-for="(type, i) in pokemonToGuess.types" :key="i">
@@ -24,14 +23,6 @@
             :answersColor="answersColor"
           />
         </div>
-      </v-row>
-      <v-row no-gutters class="justify-center px-2" style="gap: 8px">
-        <div>
-          <ChipGuessGen
-            :guessGen="pokemonToGuess.generation"
-            :answersGen="answersGen"
-          />
-        </div>
         <div>
           <ChipGuessIsEvo
             :guessIsEvo="pokemonToGuess.is_evolution"
@@ -44,6 +35,12 @@
             :answersIsLegOrMyth="answersIsLegOrMyth"
           />
         </div>
+        <!-- <div>
+          <ChipGuessGen
+            :guessGen="pokemonToGuess.generation"
+            :answersGen="answersGen"
+          />
+        </div> -->
       </v-row>
     </v-col>
     <v-fade-transition>
@@ -54,7 +51,7 @@
       >
         <v-row no-gutters class="justify-end pa-2">
           <v-btn color="white" small @click="emitOpenDialog()">
-            <span class="black--text">Statistiques</span>
+            <span class="black--text">{{ $t('game.buttonStatsLabel') }}</span>
           </v-btn>
         </v-row>
       </v-overlay>
@@ -65,7 +62,7 @@
 <script>
 import ChipGuessType from "@/components/Chips/Guess/ChipGuessType.vue";
 import ChipGuessColor from "@/components/Chips/Guess/ChipGuessColor.vue";
-import ChipGuessGen from "@/components/Chips/Guess/ChipGuessGen.vue";
+// import ChipGuessGen from "@/components/Chips/Guess/ChipGuessGen.vue";
 import ChipGuessIsEvo from "@/components/Chips/Guess/ChipGuessIsEvo.vue";
 import ChipGuessIsLegOrMyth from "@/components/Chips/Guess/ChipGuessIsLegOrMyth.vue";
 
@@ -73,7 +70,7 @@ export default {
   components: {
     ChipGuessType,
     ChipGuessColor,
-    ChipGuessGen,
+    // ChipGuessGen,
     ChipGuessIsEvo,
     ChipGuessIsLegOrMyth,
   },

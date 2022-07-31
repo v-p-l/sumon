@@ -1,4 +1,4 @@
-import firebase from "../plugins/firebase/firebaseConfig";
+import firebase from "@/plugins/firebase/firebaseConfig";
 
 const db = firebase.collection("dailyChallenge");
 

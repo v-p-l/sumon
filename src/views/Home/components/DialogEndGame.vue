@@ -4,11 +4,11 @@
       <v-row no-gutters class="justify-center">
         <v-col cols="12">
           <v-card-title class="justify-center pa-0 mb-4">{{
-            isPokemonGuessed ? "GG ! 😄" : `Dommage... 😞`
+            isPokemonGuessed ? $t('game.dialogStats.titleWin') : $t('game.dialogStats.titleLose')
           }}</v-card-title>
           <v-card-text class="d-flex flex-row justify-center pb-0"
-            >Le pokémon à deviner était
-            {{ pokemonToGuess.french_name }}.</v-card-text
+            >{{ $t('game.dialogStats.guessReveal') }}
+            {{ pokemonName }}.</v-card-text
           >
           <v-img
             max-height="100"
@@ -30,14 +30,12 @@
                 :answersColor="[pokemonToGuess.color]"
               />
             </div>
-          </v-row>
-          <v-row no-gutters class="justify-center px-4 mb-4" style="gap: 8px">
-            <div>
+            <!-- <div>
               <ChipGuessGen
                 :guessGen="pokemonToGuess.generation"
                 :answersGen="[pokemonToGuess.generation]"
               />
-            </div>
+            </div> -->
             <div>
               <ChipGuessIsEvo
                 :guessIsEvo="pokemonToGuess.is_evolution"
@@ -69,7 +67,7 @@
             </div>
             <v-btn small depressed color="primary" @click="copyStats()">
               <v-icon small class="mr-1">mdi-content-copy</v-icon>
-              <span>Copier</span>
+              <span>{{ $t('game.dialogStats.buttonCopyLabel') }}</span>
             </v-btn>
           </v-row>
           <div v-for="(rowStats, i) in globalStats" :key="i" class="px-4">
@@ -85,15 +83,16 @@
 import { mapGetters } from "vuex";
 import ChipGuessType from "@/components/Chips/Guess/ChipGuessType.vue";
 import ChipGuessColor from "@/components/Chips/Guess/ChipGuessColor.vue";
-import ChipGuessGen from "@/components/Chips/Guess/ChipGuessGen.vue";
+// import ChipGuessGen from "@/components/Chips/Guess/ChipGuessGen.vue";
 import ChipGuessIsEvo from "@/components/Chips/Guess/ChipGuessIsEvo.vue";
 import ChipGuessIsLegOrMyth from "@/components/Chips/Guess/ChipGuessIsLegOrMyth.vue";
+import PokeAPI from "@/services/PokeAPI";
 
 export default {
   components: {
     ChipGuessType,
     ChipGuessColor,
-    ChipGuessGen,
+    // ChipGuessGen,
     ChipGuessIsEvo,
     ChipGuessIsLegOrMyth,
   },
@@ -115,6 +114,9 @@ export default {
     ...mapGetters("game", [
       "challengeOfTheDayID"
     ]),
+    ...mapGetters("utilities", [
+      "lang"
+    ]),
     dialog: {
       get () {
         return this.value;
@@ -125,6 +127,9 @@ export default {
     },
     globalStats() {
       return this.generateStats(this.pokemonToGuess, this.answers);
+    },
+    pokemonName() {
+      return PokeAPI.pokemonIDToName(this.pokemonToGuess.id, this.lang);
     }
   },
   methods: {
@@ -134,7 +139,7 @@ export default {
       for (let i = 0; i < answers.length; i++) {
         let rowStats = "";
         for (let property in answers[i]) {
-          if (property === "sprite" || property === "french_name") {
+          if (property === "sprite") {
             continue;
           } else {
             if (

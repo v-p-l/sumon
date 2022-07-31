@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import PokeAPI from "@/services/PokeAPI";
 export default {
   props: {
 		guessColor: String,
@@ -18,7 +17,7 @@ export default {
       return this.guessColor === this.answerColor;
     },
     translatedAnswerColor() {
-      return PokeAPI.translateColor(this.answerColor);
+      return this.$t('game.properties.color.' + this.answerColor);
     }
   }
 };

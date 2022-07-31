@@ -1,7 +1,7 @@
 <template>
   <v-chip :color="isGuessFound ? 'green' : 'grey'" small class="px-2">
     <span :class="isGuessFound ? 'white--text' : 'black--text'">
-      {{ answerIsLegOrMyth ? "Oui" : "Non" }}
+      {{ translatedIsLegOrMyth }}
     </span>
   </v-chip>
 </template>
@@ -16,6 +16,9 @@ export default {
     isGuessFound() {
       return this.guessIsLegOrMyth === this.answerIsLegOrMyth;
     },
+    translatedIsLegOrMyth() {
+      return this.$t('game.properties.is_leg_or_myth.' + this.answerIsLegOrMyth);
+    }
   }
 };
 </script>

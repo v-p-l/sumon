@@ -1,6 +1,5 @@
 <template>
-  <v-app-bar app clipped-left>
-    <v-app-bar-nav-icon @click="updateNavBar()"></v-app-bar-nav-icon>
+  <v-app-bar app flat clipped-left color="background" class="px-4">
     <!-- <v-img
       :src="require('@/assets/logo.svg')"
       max-height="30px"
@@ -8,34 +7,24 @@
       alt="logo"
       contain
     ></v-img> -->
-    <v-toolbar-title class="font-weight-medium">Sumon</v-toolbar-title>
+    <v-toolbar-title class="font-weight-medium pl-2">Sumon</v-toolbar-title>
     <v-spacer></v-spacer>
-    <ThemeSwitcher class="mr-4" />
-    <!-- <ButtonLogin v-if="!isLoggedIn" /> -->
-    <UserMenu v-if="isLoggedIn" />
+    <LangSwitcher />
+    <ThemeSwitcher />
   </v-app-bar>
 </template>
 
 <script>
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher.vue";
-import UserMenu from "@/components/AppBar/UserMenu.vue";
-// import ButtonLogin from "@/components/AppBar/ButtonLogin.vue";
-import { mapGetters, mapMutations } from "vuex";
+import LangSwitcher from "@/components/LangSwitcher/LangSwitcher.vue";
 
 export default {
   components: {
     ThemeSwitcher,
-    UserMenu,
-    // ButtonLogin,
+    LangSwitcher,
   },
   data() {
     return {};
-  },
-  computed: {
-    ...mapGetters("auth", ["isLoggedIn"]),
-  },
-  methods: {
-		...mapMutations("utilities", ["updateNavBar"]),
   },
 };
 </script>

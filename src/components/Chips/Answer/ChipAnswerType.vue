@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import PokeAPI from "@/services/PokeAPI";
 export default {
   props: {
 		guessTypes: Array,
@@ -18,7 +17,7 @@ export default {
       return this.guessTypes.includes(this.answerType);
     },
     translatedAnswerType() {
-      return PokeAPI.translateType(this.answerType);
+      return this.$t('game.properties.type.' + this.answerType);
     }
   }
 };

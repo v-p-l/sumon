@@ -1,7 +1,10 @@
+import i18n from "@/plugins/i18n";
+
 const getDefaultState = () => {
 	return {
 		showNavBar: false,
 		darkMode: false,
+		lang: "fr"
 	}
 }
 
@@ -15,6 +18,9 @@ const utilities = {
 		darkMode(state) {
 			return state.darkMode;
 		},
+		lang(state) {
+			return state.lang;
+		}
 	},
 	mutations: {
 		resetState(state) {
@@ -26,8 +32,15 @@ const utilities = {
 		updateDarkMode(state) {
 			state.darkMode = !state.darkMode;
 		},
+		onLangChanged(state, lang) {
+			state.lang = lang;
+		}
 	},
 	actions: {
+		changeLanguage({ commit }, lang) {
+			commit('onLangChanged', lang);
+			i18n.locale = lang;
+		},
 		resetGlobalState(context) {
 			context.commit('auth/resetState', null, { root: true })
 			context.commit('dialogs/resetState', null, { root: true })
